@@ -71,8 +71,20 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\SDL2-2.28.5\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\SDL2-2.28.5\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\SDL2-2.28.1\include;C:\SDL2-2.28.5\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\SDL2-2.28.1\lib\x64;C:\SDL2-2.28.5\lib\x64;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>D:\SDL2-2.28.1\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>D:\SDL2-2.28.1\lib\x64;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>D:\SDL2-2.28.1\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>D:\SDL2-2.28.1\lib\x64;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>D:\SDL2-2.28.1\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>D:\SDL2-2.28.1\lib\x64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -141,7 +153,16 @@
     <ClInclude Include="opcodes.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="roms\1-chip8-logo.ch8" />
+    <None Include="roms\2-ibm-logo.ch8" />
+    <None Include="roms\3-corax+.ch8" />
+    <None Include="roms\4-flags.ch8" />
+    <None Include="roms\5-quirks.ch8" />
+    <None Include="roms\6-keypad.ch8" />
     <None Include="roms\IBM-Logo.ch8" />
+    <None Include="roms\pong.ch8" />
+    <None Include="roms\SpaceInvaders.ch8" />
+    <None Include="roms\tetris.ch8" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

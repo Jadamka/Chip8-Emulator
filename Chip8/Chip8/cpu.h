@@ -4,6 +4,9 @@
 #include <string>
 #include <fstream>
 
+#define FONT_START_ADDRESS 80 // 0x050 (should be to 0x09F, but its not needed, just make sure it doesnt go above 0x200)
+#define START_ADDRESS 512 // 0x200 (noting should be in this memory until i fill it with data from ROM)
+
 #define DISP_W 64
 #define DISP_H 32
 #define CPU_FREQ 500
@@ -16,10 +19,10 @@ class CPU
 	public:
 		CPU();
 		void Cycle();
+		void Decrease();
 		void LoadRom(const char* filename);
 		uint8_t memory[4096];
-		uint8_t regs[15];
-		uint8_t flag;
+		uint8_t regs[16];
 		uint16_t I;
 		uint16_t pc;
 		uint8_t sp;

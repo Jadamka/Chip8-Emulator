@@ -37,5 +37,32 @@
     <None Include="roms\IBM-Logo.ch8">
       <Filter>Soubory zdrojů</Filter>
     </None>
+    <None Include="roms\1-chip8-logo.ch8">
+      <Filter>Soubory zdrojů</Filter>
+    </None>
+    <None Include="roms\2-ibm-logo.ch8">
+      <Filter>Soubory zdrojů</Filter>
+    </None>
+    <None Include="roms\3-corax+.ch8">
+      <Filter>Soubory zdrojů</Filter>
+    </None>
+    <None Include="roms\4-flags.ch8">
+      <Filter>Soubory zdrojů</Filter>
+    </None>
+    <None Include="roms\5-quirks.ch8">
+      <Filter>Soubory zdrojů</Filter>
+    </None>
+    <None Include="roms\6-keypad.ch8">
+      <Filter>Soubory zdrojů</Filter>
+    </None>
+    <None Include="roms\SpaceInvaders.ch8">
+      <Filter>Soubory zdrojů</Filter>
+    </None>
+    <None Include="roms\pong.ch8">
+      <Filter>Soubory zdrojů</Filter>
+    </None>
+    <None Include="roms\tetris.ch8">
+      <Filter>Soubory zdrojů</Filter>
+    </None>
   </ItemGroup>
 </Project>

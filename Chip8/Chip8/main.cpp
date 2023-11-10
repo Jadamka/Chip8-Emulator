@@ -9,7 +9,7 @@
 int main(int argc, char* argv[])
 {
 	CPU cpu;
-	cpu.LoadRom("roms/IBM-Logo.ch8");
+	cpu.LoadRom("roms/4-flags.ch8");
 	
 	SDL_Window* window = 0;
 	SDL_Renderer* renderer = 0;
@@ -30,9 +30,13 @@ int main(int argc, char* argv[])
 
 	int pitch = sizeof(cpu.display[0]) * DISP_W; // video pitch for update texture
 
-	auto lastTime = std::chrono::high_resolution_clock::now();
+	auto lastTimeCycle = std::chrono::high_resolution_clock::now();
 	double nsPerCycle = 1000000000.0 / CPU_FREQ;
-	double delta = 0;
+	double deltaCycle = 0;
+
+	auto lastTimeDecrease = std::chrono::high_resolution_clock::now();
+	double nsPerDecrase = 1000000000.0 / TIMER_FREQ;
+	double deltaDecrease = 0;
 
 	while (!quit)
 	{
@@ -43,18 +47,134 @@ int main(int argc, char* argv[])
 				case SDL_QUIT:
 					quit = true;
 					break;
+				case SDL_KEYDOWN:
+					switch (e.key.keysym.sym)
+					{
+						case SDLK_1:
+							cpu.keypad[0] = 1;
+							break;
+						case SDLK_2:
+							cpu.keypad[1] = 1;
+							break;
+						case SDLK_3:
+							cpu.keypad[2] = 1;
+							break;
+						case SDLK_4:
+							cpu.keypad[3] = 1;
+							break;
+						case SDLK_q:
+							cpu.keypad[4] = 1;
+							break;
+						case SDLK_w:
+							cpu.keypad[5] = 1;
+							break;
+						case SDLK_e:
+							cpu.keypad[6] = 1;
+							break;
+						case SDLK_r:
+							cpu.keypad[7] = 1;
+							break;
+						case SDLK_a:
+							cpu.keypad[8] = 1;
+							break;
+						case SDLK_s:
+							cpu.keypad[9] = 1;
+							break;
+						case SDLK_d:
+							cpu.keypad[10] = 1;
+							break;
+						case SDLK_f:
+							cpu.keypad[11] = 1;
+							break;
+						case SDLK_z:
+							cpu.keypad[12] = 1;
+							break;
+						case SDLK_x:
+							cpu.keypad[13] = 1;
+							break;
+						case SDLK_c:
+							cpu.keypad[14] = 1;
+							break;
+						case SDLK_v:
+							cpu.keypad[15] = 1;
+							break;
+					}
+					break;
+				case SDL_KEYUP:
+					switch (e.key.keysym.sym)
+					{
+						case SDLK_1:
+							cpu.keypad[0] = 0;
+							break;
+						case SDLK_2:
+							cpu.keypad[1] = 0;
+							break;
+						case SDLK_3:
+							cpu.keypad[2] = 0;
+							break;
+						case SDLK_4:
+							cpu.keypad[3] = 0;
+							break;
+						case SDLK_q:
+							cpu.keypad[4] = 0;
+							break;
+						case SDLK_w:
+							cpu.keypad[5] = 0;
+							break;
+						case SDLK_e:
+							cpu.keypad[6] = 0;
+							break;
+						case SDLK_r:
+							cpu.keypad[7] = 0;
+							break;
+						case SDLK_a:
+							cpu.keypad[8] = 0;
+							break;
+						case SDLK_s:
+							cpu.keypad[9] = 0;
+							break;
+						case SDLK_d:
+							cpu.keypad[10] = 0;
+							break;
+						case SDLK_f:
+							cpu.keypad[11] = 0;
+							break;
+						case SDLK_z:
+							cpu.keypad[12] = 0;
+							break;
+						case SDLK_x:
+							cpu.keypad[13] = 0;
+							break;
+						case SDLK_c:
+							cpu.keypad[14] = 0;
+							break;
+						case SDLK_v:
+							cpu.keypad[15] = 0;
+							break;
+						}
+					break;
 			}
 		}
 
 		auto now = std::chrono::high_resolution_clock::now();
-		std::chrono::duration<double> elapsedTime = now - lastTime;
-		lastTime = now;
-		delta += elapsedTime.count() * 1000000000.0;
+		std::chrono::duration<double> elapsedTimeCycle = now - lastTimeCycle;
+		lastTimeCycle = now;
+		deltaCycle += elapsedTimeCycle.count() * 1000000000.0;
 
-		while (delta >= nsPerCycle)
+		while (deltaCycle >= nsPerCycle)
 		{
 			cpu.Cycle();
-			delta -= nsPerCycle;
+			deltaCycle -= nsPerCycle;
+		}
+
+		std::chrono::duration<double> elapsedTimeDecrease = now - lastTimeDecrease;
+		lastTimeDecrease = now;
+		deltaDecrease += elapsedTimeDecrease.count() * 1000000000.0;
+
+		while (deltaDecrease >= nsPerDecrase)
+		{
+			cpu.Decrease();
+			deltaDecrease -= nsPerDecrase;
 		}
 
 		SDL_UpdateTexture(texture, nullptr, cpu.display, pitch);
