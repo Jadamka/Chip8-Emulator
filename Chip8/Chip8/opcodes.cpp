@@ -130,9 +130,12 @@ void OP_8XY6(CPU* cpu, uint16_t opcode)
 	uint8_t Vx = (opcode & 0x0F00) >> 8;
 	uint8_t Vy = (opcode & 0x00F0) >> 4;
 
-	cpu->regs[Vx] = cpu->regs[Vy];
 	cpu->regs[0xF] = (cpu->regs[Vy] & 0b1);
-	cpu->regs[Vx] >>= 0b1;
+	cpu->regs[Vx] >>= 1;
+
+	//cpu->regs[Vx] = cpu->regs[Vy];
+	//cpu->regs[0xF] = (cpu->regs[Vy] & 0b1);
+	//cpu->regs[Vx] >>= 0b1;
 }
 
 void OP_8XY7(CPU* cpu, uint16_t opcode)
@@ -152,9 +155,12 @@ void OP_8XYE(CPU* cpu, uint16_t opcode)
 	uint8_t Vx = (opcode & 0x0F00) >> 8;
 	uint8_t Vy = (opcode & 0x00F0) >> 4;
 
-	cpu->regs[Vx] = cpu->regs[Vy];
 	cpu->regs[0xF] = (cpu->regs[Vx] & 0x80) >> 7;
-	cpu->regs[Vx] <<= 0b1;
+	cpu->regs[Vx] <<= 1;
+	
+	//cpu->regs[Vx] = cpu->regs[Vy];
+	//cpu->regs[0xF] = (cpu->regs[Vx] & 0x80) >> 7;
+	//cpu->regs[Vx] <<= 0b1;
 }
 
 void OP_9XY0(CPU* cpu, uint16_t opcode)

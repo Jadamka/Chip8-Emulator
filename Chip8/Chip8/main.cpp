@@ -10,7 +10,7 @@
 int main(int argc, char* argv[])
 {
 	CPU cpu;
-	cpu.LoadRom("roms/4-flags.ch8");
+	cpu.LoadRom("games/Space Invaders [David Winter].ch8");
 	
 	SDL_Window* window = 0;
 	SDL_Renderer* renderer = 0;

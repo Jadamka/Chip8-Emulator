@@ -79,5 +79,11 @@
     <None Include="roms\BC_test.ch8">
       <Filter>Soubory zdrojů</Filter>
     </None>
+    <None Include="roms\c8_test.c8">
+      <Filter>Soubory zdrojů</Filter>
+    </None>
+    <None Include="roms\test_opcode.ch8">
+      <Filter>Soubory zdrojů</Filter>
+    </None>
   </ItemGroup>
 </Project>
