@@ -59,6 +59,7 @@ void OP_6XNN(CPU* cpu, uint16_t opcode)
 	uint8_t byte = (opcode & 0x00FF);
 
 	cpu->regs[Vx] = byte;
+
 }
 
 void OP_7XNN(CPU* cpu, uint16_t opcode)
@@ -106,7 +107,9 @@ void OP_8XY4(CPU* cpu, uint16_t opcode)
 	uint8_t Vx = (opcode & 0x0F00) >> 8;
 	uint8_t Vy = (opcode & 0x00F0) >> 4;
 
-	cpu->regs[0xF] = ((cpu->regs[Vx] + cpu->regs[Vy]) > 0xFF);
+	uint16_t res = cpu->regs[Vx] + cpu->regs[Vy];
+
+	cpu->regs[0xF] = (res > 0xFF) ? 1 : 0;
 	cpu->regs[Vx] += cpu->regs[Vy];
 }
 
@@ -128,7 +131,7 @@ void OP_8XY6(CPU* cpu, uint16_t opcode)
 	uint8_t Vy = (opcode & 0x00F0) >> 4;
 
 	cpu->regs[Vx] = cpu->regs[Vy];
-	cpu->regs[0xF] = (cpu->regs[Vx] & 0b1);
+	cpu->regs[0xF] = (cpu->regs[Vy] & 0b1);
 	cpu->regs[Vx] >>= 0b1;
 }
 

@@ -6,6 +6,7 @@
 
 #define SCALE 10
 
+// TODO: AUDIO
 int main(int argc, char* argv[])
 {
 	CPU cpu;

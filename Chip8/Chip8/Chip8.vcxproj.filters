@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Games">
+      <UniqueIdentifier>{99e421ed-8ac5-474e-8bb1-4477f6f9ae1e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -55,13 +58,25 @@
     <None Include="roms\6-keypad.ch8">
       <Filter>Soubory zdrojů</Filter>
     </None>
-    <None Include="roms\SpaceInvaders.ch8">
-      <Filter>Soubory zdrojů</Filter>
+    <None Include="games\Breakout [Carmelo Cortez, 1979].ch8">
+      <Filter>Games</Filter>
     </None>
-    <None Include="roms\pong.ch8">
-      <Filter>Soubory zdrojů</Filter>
+    <None Include="games\Brix [Andreas Gustafsson, 1990].ch8">
+      <Filter>Games</Filter>
     </None>
-    <None Include="roms\tetris.ch8">
+    <None Include="games\Space Invaders [David Winter].ch8">
+      <Filter>Games</Filter>
+    </None>
+    <None Include="games\Clock Program [Bill Fisher, 1981].ch8">
+      <Filter>Games</Filter>
+    </None>
+    <None Include="games\Random Number Test [Matthew Mikolay, 2010].ch8">
+      <Filter>Games</Filter>
+    </None>
+    <None Include="games\Trip8 Demo (2008) [Revival Studios].ch8">
+      <Filter>Games</Filter>
+    </None>
+    <None Include="roms\BC_test.ch8">
       <Filter>Soubory zdrojů</Filter>
     </None>
   </ItemGroup>
