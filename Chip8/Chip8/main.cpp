@@ -6,12 +6,20 @@
 
 #define SCALE 10
 
-// TODO: AUDIO
 int main(int argc, char* argv[])
 {
 	CPU cpu;
-	cpu.LoadRom("games/Space Invaders [David Winter].ch8");
-	
+	std::string filename = "games/Tank.ch8";
+
+	cpu.LoadRom(filename.c_str());
+
+	if (filename.find("Space Invaders") != std::string::npos)
+		cpu.shift_quirk = true;
+
+	if (filename.find("Astro Dodge") != std::string::npos)
+		cpu.load_store_quirk = true;
+
+
 	SDL_Window* window = 0;
 	SDL_Renderer* renderer = 0;
 	SDL_Texture* texture = 0;

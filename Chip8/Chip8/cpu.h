@@ -1,15 +1,20 @@
 #pragma once
 
+#include <SDL.h>
+#include <SDL_audio.h>
 #include <stdint.h>
 #include <string>
 #include <fstream>
+
+// For audio: Beep()
+#include <Windows.h>
 
 #define FONT_START_ADDRESS 80 // 0x050 (should be to 0x09F, but its not needed, just make sure it doesnt go above 0x200)
 #define START_ADDRESS 512 // 0x200 (noting should be in this memory until i fill it with data from ROM)
 
 #define DISP_W 64
 #define DISP_H 32
-#define CPU_FREQ 500
+#define CPU_FREQ 1000
 #define TIMER_FREQ 60
 
 class CPU
@@ -18,9 +23,12 @@ class CPU
 		void CallIns();
 	public:
 		CPU();
+		~CPU();
 		void Cycle();
 		void Decrease();
 		void LoadRom(const char* filename);
+		bool shift_quirk;
+		bool load_store_quirk;
 		uint8_t memory[4096];
 		uint8_t regs[16];
 		uint16_t I;

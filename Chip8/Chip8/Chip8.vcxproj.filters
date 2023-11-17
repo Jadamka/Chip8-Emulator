@@ -85,5 +85,14 @@
     <None Include="roms\test_opcode.ch8">
       <Filter>Soubory zdrojů</Filter>
     </None>
+    <None Include="games\Astro Dodge [Revival Studios, 2008].ch8">
+      <Filter>Games</Filter>
+    </None>
+    <None Include="games\Tank.ch8">
+      <Filter>Games</Filter>
+    </None>
+    <None Include="games\tetris.ch8">
+      <Filter>Games</Filter>
+    </None>
   </ItemGroup>
 </Project>

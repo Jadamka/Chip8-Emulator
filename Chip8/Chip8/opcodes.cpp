@@ -130,12 +130,17 @@ void OP_8XY6(CPU* cpu, uint16_t opcode)
 	uint8_t Vx = (opcode & 0x0F00) >> 8;
 	uint8_t Vy = (opcode & 0x00F0) >> 4;
 
-	cpu->regs[0xF] = (cpu->regs[Vy] & 0b1);
-	cpu->regs[Vx] >>= 1;
-
-	//cpu->regs[Vx] = cpu->regs[Vy];
-	//cpu->regs[0xF] = (cpu->regs[Vy] & 0b1);
-	//cpu->regs[Vx] >>= 0b1;
+	if (cpu->shift_quirk)
+	{
+		cpu->regs[0xF] = (cpu->regs[Vy] & 0b1);
+		cpu->regs[Vx] >>= 1;
+	}
+	else
+	{
+		cpu->regs[Vx] = cpu->regs[Vy];
+		cpu->regs[0xF] = (cpu->regs[Vy] & 0b1);
+		cpu->regs[Vx] >>= 0b1;
+	}
 }
 
 void OP_8XY7(CPU* cpu, uint16_t opcode)
@@ -155,12 +160,17 @@ void OP_8XYE(CPU* cpu, uint16_t opcode)
 	uint8_t Vx = (opcode & 0x0F00) >> 8;
 	uint8_t Vy = (opcode & 0x00F0) >> 4;
 
-	cpu->regs[0xF] = (cpu->regs[Vx] & 0x80) >> 7;
-	cpu->regs[Vx] <<= 1;
-	
-	//cpu->regs[Vx] = cpu->regs[Vy];
-	//cpu->regs[0xF] = (cpu->regs[Vx] & 0x80) >> 7;
-	//cpu->regs[Vx] <<= 0b1;
+	if (cpu->shift_quirk)
+	{
+		cpu->regs[0xF] = (cpu->regs[Vx] & 0x80) >> 7;
+		cpu->regs[Vx] <<= 1;
+	}
+	else
+	{
+		cpu->regs[Vx] = cpu->regs[Vy];
+		cpu->regs[0xF] = (cpu->regs[Vx] & 0x80) >> 7;
+		cpu->regs[Vx] <<= 0b1;
+	}
 }
 
 void OP_9XY0(CPU* cpu, uint16_t opcode)
@@ -181,7 +191,7 @@ void OP_ANNN(CPU* cpu, uint16_t opcode)
 
 void OP_BNNN(CPU* cpu, uint16_t opcode)
 {
-	uint16_t address = (opcode & 0x0FFF);
+	uint16_t address = (opcode & 0x00FF);
 
 	cpu->pc = address + cpu->regs[0];
 }
@@ -214,7 +224,7 @@ void OP_DXYN(CPU* cpu, uint16_t opcode)
 		uint8_t pixel = cpu->memory[cpu->I + i];
 		for (unsigned int j = 0; j < 8; j++)
 		{
-			if (pixel & (0x80 >> j))
+			if ((pixel & (0x80 >> j)) != 0)
 			{
 				if (cpu->display[(x + j + ((y + i) * DISP_W))] == 0xFFFFFFFF)
 					cpu->regs[0xF] = 1;
@@ -310,9 +320,21 @@ void OP_FX55(CPU* cpu, uint16_t opcode)
 {
 	uint8_t x = (opcode & 0x0F00) >> 8;
 
-	for (unsigned int i = 0; i <= x; i++)
+	if (cpu->load_store_quirk)
 	{
-		cpu->memory[cpu->I + i] = cpu->regs[i];
+		for (unsigned int i = 0; i <= x; i++)
+		{
+			cpu->memory[cpu->I++] = cpu->regs[i];
+		}
+
+		cpu->I = (cpu->I) + x + 1;
+	}
+	else
+	{
+		for (unsigned int i = 0; i <= x; i++)
+		{
+			cpu->memory[cpu->I + i] = cpu->regs[i];
+		}
 	}
 }
 
@@ -320,8 +342,20 @@ void OP_FX65(CPU* cpu, uint16_t opcode)
 {
 	uint8_t x = (opcode & 0x0F00) >> 8;
 
-	for (int i = 0; i <= x; i++)
+	if (cpu->load_store_quirk)
 	{
-		cpu->regs[i] = cpu->memory[cpu->I + i];
+		for (unsigned int i = 0; i <= x; i++)
+		{
+			cpu->regs[cpu->I++] = cpu->memory[i];
+		}
+
+		cpu->I = (cpu->I) + x + 1;
+	}
+	else
+	{
+		for (unsigned int i = 0; i <= x; i++)
+		{
+			cpu->regs[i] = cpu->memory[cpu->I + i];
+		}
 	}
 }

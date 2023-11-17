@@ -16,6 +16,9 @@ CPU::CPU()
 	sound = 0;
 	I = 0;
 	opcode = 0;
+
+	shift_quirk = false;
+	load_store_quirk = false;
 }
 
 void CPU::CallIns()
@@ -149,7 +152,10 @@ void CPU::Decrease()
 	if (delay > 0)
 		delay--;
 	if (sound > 0)
+	{
 		sound--;
+		Beep(500, 1);
+	}
 }
 
 void CPU::LoadRom(const char* filename)
@@ -162,4 +168,8 @@ void CPU::LoadRom(const char* filename)
 	std::streampos size = file.tellg();
 	file.seekg(0, std::ios::beg);
 	file.read((char*)(&memory[START_ADDRESS]), size);
+}
+
+CPU::~CPU()
+{
 }

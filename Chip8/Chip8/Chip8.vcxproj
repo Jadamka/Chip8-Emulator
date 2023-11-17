@@ -153,11 +153,14 @@
     <ClInclude Include="opcodes.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="games\Astro Dodge [Revival Studios, 2008].ch8" />
     <None Include="games\Breakout [Carmelo Cortez, 1979].ch8" />
     <None Include="games\Brix [Andreas Gustafsson, 1990].ch8" />
     <None Include="games\Clock Program [Bill Fisher, 1981].ch8" />
     <None Include="games\Random Number Test [Matthew Mikolay, 2010].ch8" />
     <None Include="games\Space Invaders [David Winter].ch8" />
+    <None Include="games\Tank.ch8" />
+    <None Include="games\tetris.ch8" />
     <None Include="games\Trip8 Demo (2008) [Revival Studios].ch8" />
     <None Include="roms\1-chip8-logo.ch8" />
     <None Include="roms\2-ibm-logo.ch8" />
