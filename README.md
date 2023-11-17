@@ -1,11 +1,9 @@
 # Chip8-Emulator
 
-Cant pass all tests for 4-flags.ch8
+Its pretty much working for many games, only games that are not working are those on which i need to implement load_store_quirk (Astro Dodge)
 
-Its pretty much working for other roms and games are working fine. But I just found that there is problem with some games and for some i need to enable [load_store_quirk] and [shift_quirk] (shift_quirk was implemented in order to run Space Invaders)
+Also while playing tank.ch8 i noticed sometimes while playing it crashes with access violation. When I am using modulo in DXYN i add -1 to WIDTH and HEIGHT, the error seems to be fixed, but I am not sure. I still need to look into it
 
 TODO:
 
-Better shift_quirk and load_store_quirk
-
-Audio
+load_store_quirk
