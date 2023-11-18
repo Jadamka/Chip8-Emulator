@@ -14,7 +14,7 @@
 
 #define DISP_W 64
 #define DISP_H 32
-#define CPU_FREQ 1000
+#define CPU_FREQ 500
 #define TIMER_FREQ 60
 
 class CPU
@@ -27,8 +27,9 @@ class CPU
 		void Cycle();
 		void Decrease();
 		void LoadRom(const char* filename);
+
 		bool shift_quirk;
-		bool load_store_quirk;
+		
 		uint8_t memory[4096];
 		uint8_t regs[16];
 		uint16_t I;

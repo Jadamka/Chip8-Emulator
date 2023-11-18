@@ -168,6 +168,7 @@
     <None Include="roms\4-flags.ch8" />
     <None Include="roms\5-quirks.ch8" />
     <None Include="roms\6-keypad.ch8" />
+    <None Include="roms\7-beep.ch8" />
     <None Include="roms\BC_test.ch8" />
     <None Include="roms\c8_test.c8" />
     <None Include="roms\IBM-Logo.ch8" />

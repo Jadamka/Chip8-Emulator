@@ -9,16 +9,12 @@
 int main(int argc, char* argv[])
 {
 	CPU cpu;
-	std::string filename = "games/Tank.ch8";
+	std::string filename = "games/Space Invaders [David Winter].ch8";
 
 	cpu.LoadRom(filename.c_str());
 
 	if (filename.find("Space Invaders") != std::string::npos)
 		cpu.shift_quirk = true;
-
-	if (filename.find("Astro Dodge") != std::string::npos)
-		cpu.load_store_quirk = true;
-
 
 	SDL_Window* window = 0;
 	SDL_Renderer* renderer = 0;
@@ -187,7 +183,7 @@ int main(int argc, char* argv[])
 		}
 
 		SDL_UpdateTexture(texture, nullptr, cpu.display, pitch);
-		SDL_RenderClear(renderer);
+		SDL_RenderClear(renderer); // When object goes too up/down it crashes !!!
 		SDL_RenderCopy(renderer, texture, nullptr, nullptr);
 		SDL_RenderPresent(renderer);
 	}

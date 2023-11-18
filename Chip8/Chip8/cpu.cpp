@@ -18,7 +18,6 @@ CPU::CPU()
 	opcode = 0;
 
 	shift_quirk = false;
-	load_store_quirk = false;
 }
 
 void CPU::CallIns()

@@ -94,5 +94,8 @@
     <None Include="games\tetris.ch8">
       <Filter>Games</Filter>
     </None>
+    <None Include="roms\7-beep.ch8">
+      <Filter>Soubory zdrojů</Filter>
+    </None>
   </ItemGroup>
 </Project>

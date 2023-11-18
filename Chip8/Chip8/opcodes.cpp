@@ -191,7 +191,7 @@ void OP_ANNN(CPU* cpu, uint16_t opcode)
 
 void OP_BNNN(CPU* cpu, uint16_t opcode)
 {
-	uint16_t address = (opcode & 0x00FF);
+	uint16_t address = (opcode & 0x0FFF);
 
 	cpu->pc = address + cpu->regs[0];
 }
@@ -213,9 +213,9 @@ void OP_DXYN(CPU* cpu, uint16_t opcode)
 	uint8_t Vx = (opcode & 0x0F00) >> 8;
 	uint8_t Vy = (opcode & 0x00F0) >> 4;
 	uint8_t height = (opcode & 0x000F);
-
-	uint8_t x = cpu->regs[Vx] % DISP_W;
-	uint8_t y = cpu->regs[Vy] % DISP_H;
+	
+	uint8_t x = cpu->regs[Vx] % (DISP_W - 1);
+	uint8_t y = cpu->regs[Vy] % (DISP_H - 1);
 
 	cpu->regs[0xF] = 0;
 
@@ -320,21 +320,9 @@ void OP_FX55(CPU* cpu, uint16_t opcode)
 {
 	uint8_t x = (opcode & 0x0F00) >> 8;
 
-	if (cpu->load_store_quirk)
+	for (unsigned int i = 0; i <= x; i++)
 	{
-		for (unsigned int i = 0; i <= x; i++)
-		{
-			cpu->memory[cpu->I++] = cpu->regs[i];
-		}
-
-		cpu->I = (cpu->I) + x + 1;
-	}
-	else
-	{
-		for (unsigned int i = 0; i <= x; i++)
-		{
-			cpu->memory[cpu->I + i] = cpu->regs[i];
-		}
+		cpu->memory[cpu->I + i] = cpu->regs[i];
 	}
 }
 
@@ -342,20 +330,8 @@ void OP_FX65(CPU* cpu, uint16_t opcode)
 {
 	uint8_t x = (opcode & 0x0F00) >> 8;
 
-	if (cpu->load_store_quirk)
+	for (unsigned int i = 0; i <= x; i++)
 	{
-		for (unsigned int i = 0; i <= x; i++)
-		{
-			cpu->regs[cpu->I++] = cpu->memory[i];
-		}
-
-		cpu->I = (cpu->I) + x + 1;
-	}
-	else
-	{
-		for (unsigned int i = 0; i <= x; i++)
-		{
-			cpu->regs[i] = cpu->memory[cpu->I + i];
-		}
+		cpu->regs[i] = cpu->memory[cpu->I + i];
 	}
 }
